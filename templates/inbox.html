@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Inbox</h1>
+
+{% if messages %}
+    {% for msg in messages %}
+        <div class="card">
+            <p>{{ msg.text }}</p>
+            <button>Reply</button>
+            <button>Delete</button>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No messages</p>
+{% endif %}
+
+{% endblock %}

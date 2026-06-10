@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Upload Photo</h1>
+
+<form method="POST" enctype="multipart/form-data" class="form-box">
+    <input type="file" name="photo" required>
+    <input type="text" name="keyword" placeholder="Keyword">
+    <button type="submit">Upload</button>
+</form>
+{% endblock %}

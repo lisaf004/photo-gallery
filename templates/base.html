@@ -11,14 +11,37 @@
 
 <!-- 🔝 NAVBAR -->
 <div class="navbar">
-    <div class="logo">Photo Gallery</div>
+    
+    <!-- Links -->
+    <div class="nav-left">
+        <div class="logo">Photo Gallery</div>
+    </div>
 
-    <div class="nav-links">
+    <!-- Mitte -->
+    <div class="nav-center">
         <a href="/">Home</a>
         <a href="/upload">Upload</a>
         <a href="/inbox">Inbox</a>
-        <a href="/login" class="login-btn">Login</a>
     </div>
+
+    <!-- Rechts -->
+    <div class="nav-right">
+        {% if session.get("user") %}
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/signup">Sign up</a>
+        {% endif %}
+    </div>
+
+</div>
+
+<!-- 🔍 SEARCH BAR -->
+<div class="search-container">
+    <form action="/search" method="GET">
+        <input type="text" name="q" placeholder="Search for keywords...">
+        <button type="submit">Search</button>
+    </form>
 </div>
 
 <!-- CONTENT -->

@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% if logged_in %}
 <div class="category-grid">
     {% for category in categories %}
         <div class="category-card">
@@ -19,5 +20,10 @@
         </div>
     {% endfor %}
 </div>
+{% else %}
+<p style="text-align:center; margin-top:50px;">
+    Please log in to see pictures.
+</p>
 
+{% endif %}
 {% endblock %}

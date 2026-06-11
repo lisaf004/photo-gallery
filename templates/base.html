@@ -2,24 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title or "Photo Gallery" }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Photo Gallery</title>
+
+    <!-- CSS EINBINDEN -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 
-    <nav class="navbar">
-        <h2>📸 Gallery</h2>
-        <div>
-            <a href="/">Home</a>
-            <a href="/upload">Upload</a>
-            <a href="/inbox">Inbox</a>
-            <a href="/login">Login</a>
-        </div>
-    </nav>
+<!-- 🔝 NAVBAR -->
+<div class="navbar">
+    <div class="logo">Photo Gallery</div>
 
-    <div class="container">
-        {% block content %}{% endblock %}
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/upload">Upload</a>
+        <a href="/inbox">Inbox</a>
+        <a href="/login" class="login-btn">Login</a>
     </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
 
 </body>
 </html>

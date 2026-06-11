@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>My Photos</h1>
 
-<div class="gallery">
-    {% for photo in photos %}
-        <div class="card">
-            <img src="{{ url_for('static', filename='uploads/' + photo.filename) }}">
-            <p>{{ photo.keyword }}</p>
+<div class="category-grid">
+    {% for category in categories %}
+        <div class="category-card">
+            <h3>{{ category }}</h3>
+
+            {% if images[category] %}
+                <div class="image-list">
+                    {% for img in images[category] %}
+                        <img src="{{ url_for('static', filename='images/' + category + '/' + img) }}">
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No images yet</p>
+            {% endif %}
         </div>
     {% endfor %}
 </div>

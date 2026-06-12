@@ -1,16 +1,15 @@
-{% extends "base.html" %}
-
-{% block content %}
-
+{% extends "base.html" %} {% block content %}
 <div class="form-container">
-    <h2>Upload Photo</h2>
-
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" required>
-        <input type="text" name="description" placeholder="Description">
-        <input type="text" name="keywords" placeholder="Keywords (e.g. car, nature)">
-        <button type="submit">Upload</button>
-    </form>
+  <h2>Upload Photo</h2>
+  <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" required />
+    <input type="text" name="description" placeholder="Add a description..." />
+    <input
+      type="text"
+      name="keywords"
+      placeholder="Keywords (e.g. mountain, beach)"
+    />
+    <button type="submit">Upload</button>
+  </form>
 </div>
-
 {% endblock %}

@@ -1,53 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Photo Gallery</title>
-
-    <!-- CSS EINBINDEN -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-
-<!-- 🔝 NAVBAR -->
-<div class="navbar">
-    
-    <!-- Links -->
-    <div class="nav-left">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Personal Photo Gallery</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="nav-left">
         <div class="logo">Photo Gallery</div>
-    </div>
+      </div>
 
-    <!-- Mitte -->
-    <div class="nav-center">
+      <div class="nav-center">
         <a href="/">Home</a>
         <a href="/upload">Upload</a>
         <a href="/inbox">Inbox</a>
-    </div>
+      </div>
 
-    <!-- Rechts -->
-    <div class="nav-right">
+      <div class="nav-right">
         {% if session.get("user") %}
-            <a href="/logout">Logout</a>
+        <a href="/logout">Logout</a>
         {% else %}
-            <a href="/login">Login</a>
-            <a href="/signup">Sign up</a>
+        <a href="/signin">Sign in</a>
+        <a href="/signup">Sign up</a>
         {% endif %}
+      </div>
     </div>
 
-</div>
-
-<!-- 🔍 SEARCH BAR -->
-<div class="search-container">
-    <form action="/search" method="GET">
-        <input type="text" name="q" placeholder="Search for keywords...">
+    <div class="search-container">
+      <form action="/search" method="GET">
+        <input type="text" name="q" placeholder="Search for keywords..." />
         <button type="submit">Search</button>
-    </form>
-</div>
+      </form>
+    </div>
 
-<!-- CONTENT -->
-<div class="container">
-    {% block content %}{% endblock %}
-</div>
-
-</body>
+    <div class="container">{% block content %}{% endblock %}</div>
+  </body>
 </html>

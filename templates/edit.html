@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block content %}
+<div class="form-container" style="width: 400px; margin: 5px auto">
+  <h2>Edit Post</h2>
+  <p style="color: gray; font-size: 13px; margin-bottom: 20px">
+    Update the description and tags of your post.
+  </p>
+
+  <form method="POST">
+    <label
+      style="
+        display: block;
+        text-align: left;
+        font-weight: bold;
+        margin-bottom: 4px;
+        color: #0f172a;
+      "
+      >Description:</label
+    >
+    <input
+      type="text"
+      name="description"
+      value="{{ photo.description }}"
+      required
+      style="margin-bottom: 15px"
+    />
+
+    <label
+      style="
+        display: block;
+        text-align: left;
+        font-weight: bold;
+        margin-bottom: 4px;
+        color: #0f172a;
+      "
+      >Keywords:</label
+    >
+    <input
+      type="text"
+      name="keywords"
+      value="{{ photo.keywords }}"
+      required
+      style="margin-bottom: 20px"
+    />
+
+    <button type="submit">Save Changes</button>
+    <a
+      href="/"
+      style="
+        display: block;
+        margin-top: 15px;
+        color: #64748b;
+        text-decoration: none;
+        font-size: 14px;
+      "
+      >Cancel</a
+    >
+  </form>
+</div>
+{% endblock %}

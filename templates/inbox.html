@@ -1,20 +1,119 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="form-container" style="width: 550px; margin: 30px auto">
+  <h2>Direct Messages (Inbox)</h2>
 
-{% block content %}
-
-<div class="form-container">
-    <h2>Inbox</h2>
-
+  <div
+    style="
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 30px;
+      text-align: left;
+    "
+  >
+    <h3 style="margin-top: 0; color: #0f172a; font-size: 16px">
+      Send New Message
+    </h3>
     <form method="POST">
-        <input type="text" name="message" placeholder="Write a message...">
-        <button type="submit">Send</button>
+      <input
+        type="text"
+        name="receiver"
+        placeholder="Recipient (Username)"
+        value="{{ receiver_name }}"
+        required
+        style="width: 100%; box-sizing: border-box; margin-bottom: 10px"
+      />
+      <input
+        type="text"
+        name="message"
+        placeholder="Write a message..."
+        required
+        style="width: 100%; box-sizing: border-box; margin-bottom: 10px"
+      />
+      <button type="submit" style="width: 100%">Send Message</button>
     </form>
+  </div>
 
-    <div class="messages">
-        {% for msg in messages %}
-            <p>{{ msg }}</p>
-        {% endfor %}
+  <h3
+    style="
+      text-align: left;
+      color: #0f172a;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 5px;
+    "
+  >
+    Message Inbox
+  </h3>
+  <div class="messages">
+    {% for msg in messages %}
+    <div
+      style="
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 15px;
+        text-align: left;
+        border-left: 4px solid #38bdf8;
+      "
+    >
+      <p style="margin: 0 0 6px 0; font-size: 12px; color: #64748b">
+        From: <b>{{ msg.sender_name }}</b>
+      </p>
+      <p style="margin: 0 0 15px 0; color: #1e293b; font-size: 15px">
+        {{ msg.content }}
+      </p>
+
+      <div style="display: flex; gap: 10px">
+        <a
+          href="/inbox?receiver={{ msg.sender_name }}"
+          style="
+            padding: 6px 14px;
+            background: #38bdf8;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+          "
+        >
+          ↩️ Reply
+        </a>
+
+        <form
+          action="/delete-message/{{ msg.id }}"
+          method="POST"
+          style="margin: 0"
+          onsubmit="
+            return confirm(
+              'Do you really want to permanently delete this message?',
+            );
+          "
+        >
+          <button
+            type="submit"
+            style="
+              padding: 6px 14px;
+              background: #ff4d4d;
+              color: white;
+              border: none;
+              border-radius: 6px;
+              font-size: 13px;
+              cursor: pointer;
+              width: auto;
+            "
+          >
+            🗑️ Delete
+          </button>
+        </form>
+      </div>
     </div>
+    {% endfor %} {% if not messages %}
+    <p style="color: gray; font-style: italic; text-align: left">
+      No messages received yet.
+    </p>
+    {% endif %}
+  </div>
 </div>
-
 {% endblock %}

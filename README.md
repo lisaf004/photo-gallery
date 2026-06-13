@@ -14,6 +14,7 @@ This project is a web-based **Personal Photo Gallery** built using Python and Fl
 ## 🚀 How to Run the Project
 
 Video Tutorial: https://youtu.be/uQlULF8RGzI?si=ESWheUobIQXeBfP0
+
 Follow these steps to set up and run the application on your computer after extracting the project ZIP file.
 
 ### Prerequisites

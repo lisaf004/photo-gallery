@@ -23,15 +23,26 @@ Make sure you have **Python 3.x** installed on your computer.
 
 Extract the ZIP archive and open your terminal or command prompt inside the project root folder (`photo-gallery/`):
 
-### Step 2: Install Dependencies
+### Step 2: Set up a Virtual Environment (Optional)
 
-This project runs on a clean Flask setup without any heavy external frameworks. You only need to install core Flask:
+It is recommended to create an isolated environment before installing packages:
+
+**On Windows:**
 
 ```bash
-pip install flask
+python -m venv venv
+venv\Scripts\activate
 ```
 
-### Step 3: Launch the Application
+### Step 3: Install Dependencies
+
+Install all required Python packages automatically using the included requirements file:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4: Launch the Application
 
 Start the backend application by running the main script:
 
@@ -39,7 +50,7 @@ Start the backend application by running the main script:
 python app.py
 ```
 
-### Step 4: Access via Web Browser
+### Step 5: Access via Web Browser
 
 Once the server is running, open your web browser and go to:
 **[http://127.0.0.1:5000/](http://127.0.0.1:5000/)**

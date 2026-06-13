@@ -1,14 +1,19 @@
 from flask import Flask, render_template, request 
 from flask import session, redirect, url_for
+from flask import Flask, request, redirect, flash
 import os
 import sqlite3
 
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 app = Flask(__name__)
 app.secret_key = "secretkey123"  # Required for secure session handling
 
 DATABASE = "database.db"
 UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+def allowed_file(filename):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def get_db_connection():
     """Establishes a connection to the SQLite database."""
@@ -150,18 +155,26 @@ def upload():
         description = request.form.get("description")
         keywords = request.form.get("keywords")
 
-        if file:
-            filepath = os.path.join(UPLOAD_FOLDER, file.filename)
-            file.save(filepath)
+        # 🔥 NEU: Datei prüfen
+        if not file or file.filename == "":
+            flash("No file selected")
+            return redirect("/upload")
 
-            # Store the photo metadata inside the database
-            conn = get_db_connection()
-            conn.execute("""
-                INSERT INTO photos (user_id, filename, description, keywords) 
-                VALUES (?, ?, ?, ?)
-            """, (session["user_id"], file.filename, description, keywords))
-            conn.commit()
-            conn.close()
+        if not allowed_file(file.filename):
+            flash("Invalid file type!")
+            return redirect("/upload")
+
+        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+        file.save(filepath)
+
+        # Store the photo metadata inside the database
+        conn = get_db_connection()
+        conn.execute("""
+            INSERT INTO photos (user_id, filename, description, keywords) 
+            VALUES (?, ?, ?, ?)
+        """, (session["user_id"], file.filename, description, keywords))
+        conn.commit()
+        conn.close()
 
         return redirect(url_for("home"))
 
